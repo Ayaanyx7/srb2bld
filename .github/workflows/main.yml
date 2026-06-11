@@ -14,23 +14,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y make git coreutils curl gawk
 
-      - name: Download and Set Up srb2bld Tool
+      - name: Prepare Local Build Script
         run: |
-          git clone https://github.com
-          cd srb2bld
           chmod +x srb2bld.sh
 
       - name: Compile APK Using Docker Build System
         run: |
-          cd srb2bld
-          ./srb2bld.sh --android --source-dir=../android
-        env:
-          SRB2BLD_NONINTERACTIVE: "true"
+          # Feeds '6' and an empty line to simulate pressing Enter on the branch prompt
+          echo -e "6\n" | ./srb2bld.sh --android
 
       - name: Upload Finished APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: SRB2Kart-Android-APK
-          path: |
-            srb2bld/build/outputs/apk/**/*.apk
-            android/app/build/outputs/apk/**/*.apk
+          path: build/outputs/apk/**/*.apk
