@@ -12,7 +12,7 @@ jobs:
       - name: Install Linux Build Prerequisites
         run: |
           sudo apt-get update
-          sudo apt-get install -y make git coreutils curl gawk docker.io
+          sudo apt-get install -y make git coreutils curl gawk
 
       - name: Download and Set Up srb2bld Tool
         run: |
@@ -22,7 +22,6 @@ jobs:
 
       - name: Compile APK Using Docker Build System
         run: |
-          # We pass commands into srb2bld to build an Android APK from the current directory
           cd srb2bld
           ./srb2bld.sh --android --source-dir=../android
         env:
