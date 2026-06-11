@@ -21,7 +21,7 @@ jobs:
       - name: Compile APK Using Docker Build System
         run: |
           # Feeds '6' and an empty line to simulate pressing Enter on the branch prompt
-          echo -e "6\n" | ./srb2bld.sh --android
+          echo -e "6\n" | ./srb2bld --android
 
       - name: Upload Finished APK Artifact
         uses: actions/upload-artifact@v4
