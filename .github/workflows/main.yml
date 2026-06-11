@@ -31,4 +31,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SRB2Kart-Android-APK
-          path: build/outputs/apk/**/*.apk
+          # This searches EVERY folder in the workspace for the finished APK
+          path: "**/*.apk"
