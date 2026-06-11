@@ -1,0 +1,37 @@
+name: Build SRB2Kart Android via srb2bld
+on:
+  workflow_dispatch: # Allows you to manually trigger this build
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Forked Code
+        uses: actions/checkout@v4
+
+      - name: Install Linux Build Prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make git coreutils curl gawk docker.io
+
+      - name: Download and Set Up srb2bld Tool
+        run: |
+          git clone https://github.com
+          cd srb2bld
+          chmod +x srb2bld.sh
+
+      - name: Compile APK Using Docker Build System
+        run: |
+          # We pass commands into srb2bld to build an Android APK from the current directory
+          cd srb2bld
+          ./srb2bld.sh --android --source-dir=../android
+        env:
+          SRB2BLD_NONINTERACTIVE: "true"
+
+      - name: Upload Finished APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SRB2Kart-Android-APK
+          path: |
+            srb2bld/build/outputs/apk/**/*.apk
+            android/app/build/outputs/apk/**/*.apk
