@@ -25,7 +25,7 @@ jobs:
           export TERM=xterm
           export SRB2BLD_NONINTERACTIVE="true"
           
-          echo -e "6\n" | ./srb2bld --android
+          echo -e "6\n\n\n" | ./srb2bld --android
 
       - name: Upload Finished APK Artifact
         uses: actions/upload-artifact@v4
