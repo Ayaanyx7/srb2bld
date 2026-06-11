@@ -20,7 +20,11 @@ jobs:
 
       - name: Compile APK Using Docker Build System
         run: |
-          # Feeds '6' and an empty line to simulate pressing Enter on the branch prompt
+          # TERM=xterm fixes the missing terminal layout error
+          # SRB2BLD_NONINTERACTIVE overrides menus to let arguments work directly
+          export TERM=xterm
+          export SRB2BLD_NONINTERACTIVE="true"
+          
           echo -e "6\n" | ./srb2bld --android
 
       - name: Upload Finished APK Artifact
