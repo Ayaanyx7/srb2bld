@@ -16,7 +16,7 @@ jobs:
 
       - name: Prepare Local Build Script
         run: |
-          chmod +x srb2bld.sh
+          chmod +x srb2bld
 
       - name: Compile APK Using Docker Build System
         run: |
